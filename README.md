@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cursor AI 聊天记录导出工具
 
-## Getting Started
+这个脚本用于导出 Cursor 编辑器的 AI 聊天记录。它可以从 Cursor 的本地数据库中提取聊天历史,并将其保存为易读的格式。
 
-First, run the development server:
+## 功能
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 从 Cursor 的本地 SQLite 数据库中读取 AI 聊天记录
+- 将聊天记录转换为 JSON 和 Markdown 格式
+- 按项目名称组织导出的文件
+- 支持批量导出多个项目的聊天记录
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 系统要求
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js (版本 12 或更高)
+- 已安装 Cursor 编辑器
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 安装
 
-## Learn More
+1. 克隆或下载此仓库到本地机器。
+2. 在项目目录中运行以下命令安装依赖:
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 使用方法
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. 确保 Cursor 编辑器已关闭。
+2. 在终端中导航到脚本所在目录。
+3. 运行以下命令:
 
-## Deploy on Vercel
+   ```
+   ts-node chat-history.ts
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. 脚本将自动查找 Cursor 的数据库文件,提取聊天记录,并在当前目录下创建输出文件。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 输出
+
+- 每个项目的聊天记录将保存在以项目名称命名的子文件夹中。
+- 每个聊天会话将生成一个 .json 文件和一个 .md 文件。
+- JSON 文件包含原始数据结构。
+- Markdown 文件提供了易读的格式,包括对话标题、摘要和消息内容。
+
+## 注意事项
+
+- 脚本默认查找 macOS 上的 Cursor 数据库位置。如果您使用其他操作系统,可能需要修改脚本中的文件路径。
+
+## 故障排除
+
+如果遇到 "Cannot read properties of undefined (reading 'value')" 错误,可能是因为:
+
+1. 数据库结构发生变化
+2. 某些聊天记录数据不完整
+
+请尝试以下解决方法:
+
+1. 确保您使用的是最新版本的脚本。
+2. 检查 Cursor 的版本,确保脚本与您的 Cursor 版本兼容。
+3. 如果问题持续,请提交一个 issue,并附上错误日志。
+
+## 贡献
+
+欢迎提交 Pull Requests 来改进这个工具。如果您遇到任何问题或有改进建议,请创建一个 issue。
+
+## 许可
+
+[MIT License](LICENSE)
